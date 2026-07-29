@@ -13,6 +13,11 @@ abstract final class AppColors {
   static const Color jungle800 = Color(0xFF123424);
   static const Color jungle900 = Color(0xFF0D2619);
 
+  // Brand gradient (dark theme variant) — auth/splash-style surfaces only.
+  // Mid stop between neutral950 and jungle700, from the design system's V6
+  // dark auth gradient (`0E1712 -> 16382A -> 1A4731`).
+  static const Color authGradientDarkMid = Color(0xFF16382A);
+
   // Cream Soda
   static const Color cream100 = Color(0xFFFFF4CC);
   static const Color cream200 = Color(0xFFF7E8AD);
@@ -56,33 +61,78 @@ abstract final class AppColors {
   static const Color iconPrimary = Color(0xFF1D2E24);
   static const Color iconSecondary = neutral500;
 
+  // Text (dark theme)
+  static const Color textPrimaryDark = Color(0xFFEFEFE3);
+  static const Color textSecondaryDark = Color(0xFFB5BCAF);
+  static const Color textTertiaryDark = Color(0xFF849085);
+  static const Color textDisabledDark = Color(0xFF4C584F);
+
+  // Icon (dark theme)
+  static const Color iconPrimaryDark = Color(0xFFE5E5D7);
+  static const Color iconSecondaryDark = Color(0xFF849085);
+
+  // Borders (dark theme)
+  static const Color borderSubtleDark = Color(0xFF24322A);
+  static const Color borderDefaultDark = Color(0xFF304237);
+  static const Color borderStrongDark = Color(0xFF45594C);
+
   static ColorScheme lightColorScheme() => ColorScheme.light(
-        primary: jungle700,
-        onPrimary: cream100,
-        primaryContainer: jungle100,
-        onPrimaryContainer: jungle800,
-        secondary: jungle500,
-        onSecondary: neutral0,
-        secondaryContainer: jungle50,
-        onSecondaryContainer: jungle700,
-        tertiary: cream100,
-        onTertiary: jungle700,
-        error: danger,
-        onError: neutral0,
-        surface: neutral0,
-        onSurface: textPrimary,
-        surfaceContainerLowest: neutral0,
-        surfaceContainerLow: neutral50,
-        surfaceContainer: neutral100,
-        surfaceContainerHigh: neutral150,
-        surfaceContainerHighest: neutral200,
-        onSurfaceVariant: textSecondary,
-        outline: neutral200,
-        outlineVariant: neutral150,
-        shadow: Color(0xFF0B0D08),
-        scrim: Color(0x801F2E25),
-        inverseSurface: neutral900,
-        onInverseSurface: neutral50,
-        inversePrimary: jungle400,
-      );
+    primary: jungle700,
+    onPrimary: cream100,
+    primaryContainer: jungle100,
+    onPrimaryContainer: jungle800,
+    secondary: jungle500,
+    onSecondary: neutral0,
+    secondaryContainer: jungle50,
+    onSecondaryContainer: jungle700,
+    tertiary: cream100,
+    onTertiary: jungle700,
+    error: danger,
+    onError: neutral0,
+    surface: neutral0,
+    onSurface: textPrimary,
+    surfaceContainerLowest: neutral0,
+    surfaceContainerLow: neutral50,
+    surfaceContainer: neutral100,
+    surfaceContainerHigh: neutral150,
+    surfaceContainerHighest: neutral200,
+    onSurfaceVariant: textSecondary,
+    outline: neutral200,
+    outlineVariant: neutral150,
+    shadow: Color(0xFF0B0D08),
+    scrim: Color(0x801F2E25),
+    inverseSurface: neutral900,
+    onInverseSurface: neutral50,
+    inversePrimary: jungle400,
+  );
+
+  static ColorScheme darkColorScheme() => ColorScheme.dark(
+    primary: jungle400,
+    onPrimary: cream100,
+    primaryContainer: jungle800,
+    onPrimaryContainer: jungle100,
+    secondary: jungle500,
+    onSecondary: neutral0,
+    secondaryContainer: jungle900,
+    onSecondaryContainer: jungle100,
+    tertiary: cream100,
+    onTertiary: jungle700,
+    error: danger,
+    onError: neutral0,
+    surface: neutral900,
+    onSurface: textPrimaryDark,
+    surfaceContainerLowest: neutral900,
+    surfaceContainerLow: neutral950,
+    surfaceContainer: neutral850,
+    surfaceContainerHigh: neutral700,
+    surfaceContainerHighest: neutral600,
+    onSurfaceVariant: textSecondaryDark,
+    outline: borderDefaultDark,
+    outlineVariant: borderSubtleDark,
+    shadow: const Color(0xFF000000),
+    scrim: const Color(0x9E000000),
+    inverseSurface: neutral50,
+    onInverseSurface: neutral900,
+    inversePrimary: jungle700,
+  );
 }

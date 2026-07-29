@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'app_colors.dart';
 import 'app_dimensions.dart';
 import 'app_typography.dart';
 
 abstract final class AppTheme {
-  static ThemeData light() {
-    final colorScheme = AppColors.lightColorScheme();
+  static ThemeData light() => _build(AppColors.lightColorScheme());
+
+  static ThemeData dark() => _build(AppColors.darkColorScheme());
+
+  static ThemeData _build(ColorScheme colorScheme) {
     final textTheme = AppTypography.textTheme();
 
     return ThemeData(
@@ -14,8 +18,8 @@ abstract final class AppTheme {
       colorScheme: colorScheme,
       textTheme: textTheme,
       scaffoldBackgroundColor: colorScheme.surface,
-      splashColor: AppColors.jungle700.withValues(alpha: 0.08),
-      highlightColor: AppColors.jungle700.withValues(alpha: 0.04),
+      splashColor: colorScheme.primary.withValues(alpha: 0.08),
+      highlightColor: colorScheme.primary.withValues(alpha: 0.04),
 
       // AppBar
       appBarTheme: AppBarTheme(
@@ -23,10 +27,13 @@ abstract final class AppTheme {
         foregroundColor: colorScheme.onSurface,
         elevation: 0,
         scrolledUnderElevation: 1,
-        shadowColor: AppColors.neutral800.withValues(alpha: 0.06),
+        shadowColor: colorScheme.shadow.withValues(alpha: 0.06),
         titleTextStyle: textTheme.titleMedium?.copyWith(
           color: colorScheme.onSurface,
         ),
+        systemOverlayStyle: colorScheme.brightness == Brightness.dark
+            ? SystemUiOverlayStyle.light
+            : SystemUiOverlayStyle.dark,
       ),
 
       // ElevatedButton → Primary button
@@ -35,8 +42,7 @@ abstract final class AppTheme {
           backgroundColor: colorScheme.primary,
           foregroundColor: colorScheme.onPrimary,
           disabledBackgroundColor: colorScheme.primary.withValues(alpha: 0.4),
-          disabledForegroundColor:
-              colorScheme.onPrimary.withValues(alpha: 0.4),
+          disabledForegroundColor: colorScheme.onPrimary.withValues(alpha: 0.4),
           elevation: 0,
           shadowColor: Colors.transparent,
           padding: const EdgeInsets.symmetric(
@@ -113,7 +119,9 @@ abstract final class AppTheme {
         ),
         hintStyle: TextStyle(
           fontSize: 15,
-          color: AppColors.textDisabled,
+          color: colorScheme.brightness == Brightness.dark
+              ? AppColors.textDisabledDark
+              : AppColors.textDisabled,
         ),
       ),
 
@@ -124,7 +132,7 @@ abstract final class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
         ),
-        shadowColor: AppColors.neutral800.withValues(alpha: 0.06),
+        shadowColor: colorScheme.shadow.withValues(alpha: 0.06),
         margin: EdgeInsets.zero,
       ),
 

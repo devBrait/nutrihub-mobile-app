@@ -45,6 +45,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  flutter_native_splash: ^2.4.6
+  flutter_launcher_icons: ^0.14.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -59,3 +61,32 @@ flutter:
 
   assets:
     - assets/images/
+
+# Config for `dart run flutter_launcher_icons` — generates the app's home
+# screen / app drawer icon (replaces the default Flutter placeholder icon)
+# for Android (incl. adaptive icon) and iOS.
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#1A4731"
+  adaptive_icon_foreground: "assets/icon/icon_foreground.png"
+  remove_alpha_ios: true
+
+# Config for `dart run flutter_native_splash:create` — generates the native
+# Android/iOS launch screens (incl. the Android 12+ Splash Screen API) so the
+# OS-drawn splash matches the brand and there's no jarring flash on launch.
+flutter_native_splash:
+  color: "#1A4731"
+  color_dark: "#1A4731"
+  image: assets/splash/nutrihub_logo_splash.png
+  image_dark: assets/splash/nutrihub_logo_splash.png
+  android_12:
+    color: "#1A4731"
+    color_dark: "#1A4731"
+    image: assets/splash/nutrihub_logo_splash.png
+    image_dark: assets/splash/nutrihub_logo_splash.png
+  android: true
+  ios: true
+  web: false
+  fullscreen: true
