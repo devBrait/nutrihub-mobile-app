@@ -1,17 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_dimensions.dart';
 import '../../../../core/widgets/app_logo.dart';
+import '../providers/auth_providers.dart';
 import 'widgets/login_footer.dart';
 import 'widgets/login_social_button.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(signInWithGoogleProvider, (previous, next) {
+      if (next.hasError) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Não foi possível entrar: ${next.error}'),
+          ),
+        );
+      }
+    });
+
+    final isSigningIn = ref.watch(signInWithGoogleProvider).isLoading;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final gradientColors = isDark
         ? const [
@@ -85,10 +98,11 @@ class LoginScreen extends StatelessWidget {
                       ),
                       const Spacer(flex: 3),
                       LoginSocialButton(
-                        onPressed: () {
-                          // TODO: implement Google Sign-In
-                          debugPrint('Google sign-in tapped');
-                        },
+                        onPressed: isSigningIn
+                            ? null
+                            : () => ref
+                                  .read(signInWithGoogleProvider.notifier)
+                                  .signIn(),
                       ),
                       const SizedBox(height: AppDimensions.s4),
                       const LoginFooter(),
